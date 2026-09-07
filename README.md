@@ -11,7 +11,7 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 | Day | Topic | Notebook | Status |
 |:---:|-------|----------|:------:|
 | 1 | Sprint 3 Planning & NLP Preprocessing | [`Sprint3_NLP-Preprocessing.ipynb`](./Day1/Sprint3_NLP-Preprocessing.ipynb) | ✅ |
-| 2 | Text Representation: TF-IDF & Word Embeddings | (Planned) | Later |
+| 2 | Text Representation: TF-IDF & Word Embeddings | [`TF-IDF_Embeddings.ipynb`](./Day2/TF-IDF_Embeddings.ipynb) | ✅ |
 | 3 | Computer-Vision Preprocessing (OpenCV) + Mentor Review | (Planned) | Later |
 | 4 | Model Integration — End-to-End `predict()` Pipeline + Error Analysis | (Planned) | Later |
 | 5 | Full Evaluation, SHAP Explainability, Sprint Review & Retrospective | (Planned) | Later |
@@ -41,12 +41,18 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 
 **Reference model:** AraBERT v2 (`aubmindlab/bert-base-arabertv2`), fine-tuned in Week 7 Day 4 — test F1 = 0.9000 on 3,000 held-out Arabic reviews
 
-### 📋 Day 2 — Text Representation: TF-IDF & Word Embeddings *(Planned)*
+### ✅ Day 2 — Text Representation: TF-IDF & Word Embeddings
 
-- TF-IDF vectorization (fit on train only — no leakage) + classical classifier baseline
-- Word embeddings (Word2Vec/GloVe or contextual) + semantic-neighbour demo
-- TF-IDF baseline vs AraBERT transformer on the same test set; representation decision
-- Carry forward Sprint-2 improvement: **k-fold cross-validation** for the classical-model evaluation
+**Focus:** converting the Day-1 cleaned Arabic text into numerical representations (TF-IDF and word embeddings), benchmarking them with a classical classifier, and deciding which representation fits the project.
+
+**Accomplishments:**
+- **TF-IDF** (`TfidfVectorizer`, fit on the 14k train reviews only) with a validation sweep (3k/5k/10k/20k) that selected `max_features = 10,000` — **Logistic Regression baseline: test Accuracy 0.8623 · macro-F1 0.8623 · ROC-AUC 0.9417** on the same 3,000-review test set as Week 7
+- **Carried-forward Sprint-2 improvement applied**: 5-fold stratified CV of the full pipeline on train → macro-F1 **0.8556 ± 0.0033** (stable)
+- **Word embeddings**: domain **Word2Vec** trained on the train split only (gensim, 100-d) **+ pre-trained AraBERT v2 embedding matrix** (768-d, cached Week-7 model — Arabic-native, no new download)
+- **Semantic-geometry demo**: nearest neighbours recover polarity & consumer-domain clusters in both embedding spaces (`ممتاز`→`رائع`/`عظيم`/`مذهل`, `سيء`→`رديء`/`فظيع`/`مروع`, `سعر`→`صفقة`/`تكلفة`/`ارخص`)
+- **Embedding doc representations (mean pooling) + same LR**: Word2Vec-mean macro-F1 0.8350, AraBERT-static-mean 0.8313 → **TF-IDF is the strongest classical representation** (idf weighting beats naive mean-pooling)
+- **Week-7 comparison**: contextual AraBERT v2 (macro-F1 0.9000, quoted) still beats all classical baselines → TF-IDF selected for the classical thread, AraBERT remains the core model for the integrated pipeline
+- Result log saved to [`Day2/day2_results.json`](./Day2/day2_results.json)
 
 ### 📋 Day 3 — Computer-Vision Preprocessing (OpenCV) + Mentor Review *(Planned)*
 
@@ -96,6 +102,10 @@ BinX_Week_08/
 ├── Day1/
 │   ├── Sprint3_NLP-Preprocessing.ipynb   # Sprint 3 planning + NLP preprocessing
 │   └── README.md                         # Day 1 summary
+├── Day2/
+│   ├── TF-IDF_Embeddings.ipynb           # Text representation: TF-IDF & word embeddings
+│   ├── day2_results.json                 # Day 2 experiment log (configs + metrics)
+│   └── README.md                         # Day 2 summary
 └── README.md                             # ← You are here
 ```
 
@@ -128,7 +138,8 @@ BinX_Week_08/
    pip install -r ../requirements.txt
    ```
 
-4. **Launch Jupyter Notebook (Day 1):**
+4. **Launch Jupyter Notebook (Day 1 or Day 2):**
    ```bash
    jupyter notebook Day1/Sprint3_NLP-Preprocessing.ipynb
+   jupyter notebook Day2/TF-IDF_Embeddings.ipynb
    ```
