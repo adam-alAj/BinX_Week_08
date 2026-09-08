@@ -12,7 +12,7 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 |:---:|-------|----------|:------:|
 | 1 | Sprint 3 Planning & NLP Preprocessing | [`Sprint3_NLP-Preprocessing.ipynb`](./Day1/Sprint3_NLP-Preprocessing.ipynb) | ✅ |
 | 2 | Text Representation: TF-IDF & Word Embeddings | [`TF-IDF_Embeddings.ipynb`](./Day2/TF-IDF_Embeddings.ipynb) | ✅ |
-| 3 | Computer-Vision Preprocessing (OpenCV) + Mentor Review | (Planned) | Later |
+| 3 | Computer-Vision Preprocessing (OpenCV) + Mentor Review | [`OpenCV.ipynb`](./Day3/OpenCV.ipynb) | ✅ |
 | 4 | Model Integration — End-to-End `predict()` Pipeline + Error Analysis | (Planned) | Later |
 | 5 | Full Evaluation, SHAP Explainability, Sprint Review & Retrospective | (Planned) | Later |
 
@@ -41,6 +41,8 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 
 **Reference model:** AraBERT v2 (`aubmindlab/bert-base-arabertv2`), fine-tuned in Week 7 Day 4 — test F1 = 0.9000 on 3,000 held-out Arabic reviews
 
+---
+
 ### ✅ Day 2 — Text Representation: TF-IDF & Word Embeddings
 
 **Focus:** converting the Day-1 cleaned Arabic text into numerical representations (TF-IDF and word embeddings), benchmarking them with a classical classifier, and deciding which representation fits the project.
@@ -54,15 +56,29 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 - **Week-7 comparison**: contextual AraBERT v2 (macro-F1 0.9000, quoted) still beats all classical baselines → TF-IDF selected for the classical thread, AraBERT remains the core model for the integrated pipeline
 - Result log saved to [`Day2/day2_results.json`](./Day2/day2_results.json)
 
-### 📋 Day 3 — Computer-Vision Preprocessing (OpenCV) + Mentor Review *(Planned)*
+---
 
-- CV preprocessing (OpenCV) + augmentation pipeline (project CV thread)
-- Mentor code & notebook review via pull request
+### ✅ Day 3 — Computer-Vision Preprocessing (OpenCV) & Augmentation Pipeline
+
+**Focus:** Building a robust, defensive OpenCV image preprocessing engine and modern Keras data augmentation pipeline aligned with transfer-learning requirements and mid-sprint review standards.
+
+**Accomplishments:**
+- **OpenCV Ingestion & Color Spaces**: Demonstrated and visually proved OpenCV's default BGR memory layout versus RGB. Verified mathematically that uncorrected channel inversion flips spectral signals (`raw_bgr[50, 50, 0] == converted_rgb[50, 50, 2]`), leading to silent inference failures.
+- **Production Preprocessing Engine (`preprocess_image_cv`)**: Built a reusable, defensive image preprocessor supporting multiple normalization modes (`standard` $[0, 1]$, `mobilenet` $[-1, 1]$, `caffe` BGR-mean subtracted, and unscaled float). Features strict error handling for missing/corrupted files, automated aspect-ratio preserving letterboxing, and `INTER_AREA` spatial downsampling.
+- **Classical Edge Extraction**: Implemented Gaussian smoothing and two-stage Canny edge detection for structural feature isolation on clinical dermoscopy samples.
+- **Modern Keras Augmentation Pipeline**: Built a hardware-accelerated augmentation sequence (`RandomFlip`, `RandomRotation`, `RandomZoom`, `RandomBrightness`, `RandomContrast`) with task-specific justifications for medical/lesion imagery. Visually validated 8 stochastic realizations demonstrating preserved diagnostic cores.
+- **Transfer Learning Compatibility**: Tested numerical parity against official Keras `preprocess_input` specifications, confirming exact parity ($< 10^{-5}$ discrepancy) and zero-warning propagation through a pre-trained `MobileNetV2` feature extractor.
+- **Quality Audit Suite**: Executed comprehensive assertions verifying shapes, ranges, latencies ($1.9\text{–}2.8\text{ ms}$ per image), and zero NaN/Inf values. Results logged to [`Day3/day3_outputs/day3_cv_audit.json`](./Day3/day3_outputs/day3_cv_audit.json).
+- **Day 4 Integration Handoff**: Exported standalone module [`Day3/day3_cv_preprocessor.py`](./Day3/day3_cv_preprocessor.py) for direct reuse in Day 4's unified `predict()` interface.
+
+---
 
 ### 📋 Day 4 — Model Integration: End-to-End `predict()` Pipeline + Error Analysis *(Planned)*
 
 - End-to-end `predict()` integration with verified training/serving consistency
 - Error analysis: confusion matrix + ≥3 misclassified examples categorised (data vs model)
+
+---
 
 ### 📋 Day 5 — Full Evaluation, SHAP Explainability, Sprint Review & Retrospective *(Planned)*
 
@@ -85,8 +101,10 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 | **Word Embeddings** | 2 | Word2Vec/GloVe, semantic-neighbour demo |
 | **Classical vs Transformer Comparison** | 2 | TF-IDF baseline vs AraBERT on same test set |
 | **K-Fold Cross-Validation** | 2/5 | Stratified k-fold CV for classical-model evaluation |
-| **CV Preprocessing (OpenCV)** | 3 | Image preprocessing + augmentation pipeline |
-| **Mentor Code Review** | 3 | Pull request review workflow |
+| **CV Preprocessing (OpenCV)** | 3 | Ingestion, BGR $\rightarrow$ RGB, `INTER_AREA` resizing, defensive error handling |
+| **Data Augmentation** | 3 | Modern Keras preprocessing layers (`RandomFlip`, `RandomRotation`, etc.) |
+| **Transfer Learning Compatibility** | 3 | MobileNetV2 / ResNet normalization matching to avoid serving skew |
+| **Mentor Code Review** | 3 | Mid-sprint pull request review workflow, audit tests, visual checks |
 | **End-to-End Integration** | 4 | `predict()` function with training/serving consistency |
 | **Error Analysis** | 4 | Confusion matrix, misclassified examples categorisation |
 | **Full Evaluation** | 5 | Task-appropriate metrics vs baselines |
@@ -106,6 +124,16 @@ BinX_Week_08/
 │   ├── TF-IDF_Embeddings.ipynb           # Text representation: TF-IDF & word embeddings
 │   ├── day2_results.json                 # Day 2 experiment log (configs + metrics)
 │   └── README.md                         # Day 2 summary
+├── Day3/
+│   ├── OpenCV.ipynb                      # CV preprocessing & augmentation pipeline
+│   ├── day3_cv_preprocessor.py           # Standalone reusable OpenCV preprocessor module
+│   ├── sample_images/                    # Synthetic test images (clinical, natural, corrupt)
+│   ├── day3_outputs/                     # Saved visualizations & audit log
+│   │   ├── bgr_vs_rgb_comparison.png
+│   │   ├── classical_preprocessing_steps.png
+│   │   ├── augmentation_visual_validation.png
+│   │   └── day3_cv_audit.json
+│   └── README.md                         # Day 3 summary & mentor review checklist
 └── README.md                             # ← You are here
 ```
 
@@ -115,6 +143,7 @@ BinX_Week_08/
 
 - [Root Repository README](../README.md) — Full internship overview and progress tracker
 - [Week 7: Sprint 2](../BinX_Week_07/README.md) — Previous sprint: AraBERT fine-tuning (F1 = 0.9000), dense network experiments
+- [Week 7, Day 2 — Building CNNs & Transfer Learning](../BinX_Week_07/Day2/README.md) — Foundation for image classification and transfer learning
 - [Week 7, Day 4 — Attention & Transformers](../BinX_Week_07/Day4/README.md) — Reference model for Sprint 3
 - [Week 7, Day 5 — Sprint 2 Close-Out & Retrospective](../BinX_Week_07/Day5/README.md) — Sprint 2 retrospective with carry-forward actions
 
@@ -138,8 +167,10 @@ BinX_Week_08/
    pip install -r ../requirements.txt
    ```
 
-4. **Launch Jupyter Notebook (Day 1 or Day 2):**
+4. **Launch Jupyter Notebook for any day:**
    ```bash
    jupyter notebook Day1/Sprint3_NLP-Preprocessing.ipynb
    jupyter notebook Day2/TF-IDF_Embeddings.ipynb
+   jupyter notebook Day3/OpenCV.ipynb
    ```
+```
