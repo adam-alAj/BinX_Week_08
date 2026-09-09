@@ -1,0 +1,67 @@
+{
+  "test_set_size": 3000,
+  "total_errors": 413,
+  "accuracy": 0.8623333333333333,
+  "macro_f1": 0.8623307482107164,
+  "confusion_matrix": [
+    [
+      1300,
+      200
+    ],
+    [
+      213,
+      1287
+    ]
+  ],
+  "dominant_error": "False Negative (Pos->Neg)",
+  "analyzed_examples": [
+    {
+      "example": 1,
+      "actual": "Negative (0)",
+      "predicted": "Positive (1)",
+      "conf": 0.9805503651348121,
+      "category": "Model Weakness",
+      "reason": "Clear sentiment not distinguished by TF-IDF"
+    },
+    {
+      "example": 2,
+      "actual": "Positive (1)",
+      "predicted": "Negative (0)",
+      "conf": 0.9392116493389658,
+      "category": "Model Weakness",
+      "reason": "Negation not captured by BoW"
+    },
+    {
+      "example": 3,
+      "actual": "Negative (0)",
+      "predicted": "Positive (1)",
+      "conf": 0.9341120970077427,
+      "category": "Model Weakness",
+      "reason": "Clear sentiment not distinguished by TF-IDF"
+    },
+    {
+      "example": 4,
+      "actual": "Negative (0)",
+      "predicted": "Positive (1)",
+      "conf": 0.9308676311637222,
+      "category": "Model Weakness",
+      "reason": "Clear sentiment not distinguished by TF-IDF"
+    },
+    {
+      "example": 5,
+      "actual": "Positive (1)",
+      "predicted": "Negative (0)",
+      "conf": 0.9261527004550676,
+      "category": "Model Weakness",
+      "reason": "Negation not captured by BoW"
+    },
+    {
+      "example": 6,
+      "actual": "Positive (1)",
+      "predicted": "Negative (0)",
+      "conf": 0.9259470171013725,
+      "category": "Data Issue",
+      "reason": "Mixed sentiment"
+    }
+  ]
+}

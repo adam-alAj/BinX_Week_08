@@ -13,7 +13,7 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 | 1 | Sprint 3 Planning & NLP Preprocessing | [`Sprint3_NLP-Preprocessing.ipynb`](./Day1/Sprint3_NLP-Preprocessing.ipynb) | ✅ |
 | 2 | Text Representation: TF-IDF & Word Embeddings | [`TF-IDF_Embeddings.ipynb`](./Day2/TF-IDF_Embeddings.ipynb) | ✅ |
 | 3 | Computer-Vision Preprocessing (OpenCV) + Mentor Review | [`OpenCV.ipynb`](./Day3/OpenCV.ipynb) | ✅ |
-| 4 | Model Integration — End-to-End `predict()` Pipeline + Error Analysis | (Planned) | Later |
+| 4 | Model Integration — End-to-End `predict()` Pipeline + Error Analysis | [`Model-Integration_Error-Analysis.ipynb`](./Day4/Model-Integration_Error-Analysis.ipynb) | ✅ |
 | 5 | Full Evaluation, SHAP Explainability, Sprint Review & Retrospective | (Planned) | Later |
 
 ---
@@ -73,10 +73,21 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 
 ---
 
-### 📋 Day 4 — Model Integration: End-to-End `predict()` Pipeline + Error Analysis *(Planned)*
+### ✅ Day 4 — Model Integration: End-to-End `predict()` Pipeline + Error Analysis
 
-- End-to-end `predict()` integration with verified training/serving consistency
-- Error analysis: confusion matrix + ≥3 misclassified examples categorised (data vs model)
+**Focus:** Transforming the separate experimental components from Days 1–3 into one coherent, reproducible inference and analysis pipeline.
+
+**Accomplishments:**
+- **End-to-end `predict()` function**: Built a single function accepting raw Arabic text and returning prediction + class probabilities, chaining `preprocess_text()` → `TfidfVectorizer` → `LogisticRegression`
+- **Training/serving consistency audit**: Verified all 7 pipeline components (normalization, tokenization, negation protection, lemmatization, stop-words, TF-IDF vectorizer, classifier) are identical between training and prediction — **consistency ACHIEVED**
+- **Test-set predictions**: Generated predictions on 3,000 held-out reviews — **Accuracy 0.8623, Macro F1 0.8623, ROC-AUC 0.9417**
+- **Confusion matrix**: False Negatives 213 (7.1%), False Positives 200 (6.7%) — balanced error distribution; dominant error: False Negatives (Pos→Neg)
+- **Misclassified example analysis**: Extracted 6 high-confidence misclassified examples, categorized as 5 Model Weakness + 1 Data Issue; identified negation scope and mixed sentiment as primary failure modes
+- **Confidence calibration**: Correct predictions mean confidence 0.8047 vs. misclassified 0.6341 — model is less certain about its errors (genuine ambiguity)
+- **Error analysis report**: Saved to [`Day4/day4_outputs/day4_error_analysis.json`](./Day4/day4_outputs/day4_error_analysis.json) with structured metrics, confusion matrix, and categorized examples
+- **Day 5 handoff**: Full evaluation, SHAP explainability, Sprint Review & Retrospective
+
+**Key insight:** The 3.77% F1 gap between TF-IDF+LR (0.8623) and AraBERT v2 (0.9000) quantifies the value of contextual understanding for Arabic sentiment analysis.
 
 ---
 
@@ -134,6 +145,12 @@ BinX_Week_08/
 │   │   ├── augmentation_visual_validation.png
 │   │   └── day3_cv_audit.json
 │   └── README.md                         # Day 3 summary & mentor review checklist
+├── Day4/
+│   ├── Model-Integration_Error-Analysis.ipynb  # End-to-end predict() + error analysis
+│   ├── day4_outputs/                     # Generated artifacts
+│   │   ├── confusion_matrix.png          # Dual-panel confusion matrix
+│   │   └── day4_error_analysis.json      # Structured error analysis report
+│   └── README.md                         # Day 4 summary
 └── README.md                             # ← You are here
 ```
 
