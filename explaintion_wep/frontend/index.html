@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinX AI/ML Internship — Week 8 Showcase</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="logo-icon">&#x1F916;</span>
+                <span class="logo-text">BinX Week 08</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">&times;</button>
+        </div>
+        <div class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-section="overview">
+                <span class="nav-icon">&#x1F4CA;</span> Overview
+            </a>
+            <div class="nav-divider"></div>
+            <a href="#day1" class="nav-item" data-section="day1">
+                <span class="nav-day">01</span> NLP Preprocessing
+            </a>
+            <a href="#day2" class="nav-item" data-section="day2">
+                <span class="nav-day">02</span> TF-IDF & Embeddings
+            </a>
+            <a href="#day3" class="nav-item" data-section="day3">
+                <span class="nav-day">03</span> Computer Vision
+            </a>
+            <a href="#day4" class="nav-item" data-section="day4">
+                <span class="nav-day">04</span> Integration & Errors
+            </a>
+            <a href="#day5" class="nav-item" data-section="day5">
+                <span class="nav-day">05</span> Evaluation & SHAP
+            </a>
+            <div class="nav-divider"></div>
+            <a href="#sprint-review" class="nav-item" data-section="sprint-review">
+                <span class="nav-icon">&#x1F4CB;</span> Sprint Review
+            </a>
+            <a href="#lab" class="nav-item nav-lab" data-section="lab">
+                <span class="nav-icon">&#x1F9EA;</span> Interactive Lab
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+        <span class="mobile-title">Week 8 Showcase</span>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="main-content">
+
+        <!-- ==================== HERO ==================== -->
+        <section id="overview" class="section hero-section">
+            <div class="hero-container">
+                <div class="hero-badge">BinXTech AI & ML Internship</div>
+                <h1 class="hero-title">
+                    <span class="hero-line1">Week 8</span>
+                    <span class="hero-line2">NLP & Computer Vision</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Sprint 3: From raw Arabic text to a fully evaluated, explained, and documented
+                    sentiment classification pipeline.
+                </p>
+
+                <!-- Pipeline Flow -->
+                <div class="pipeline-flow">
+                    <div class="pipe-step" data-step="1">
+                        <div class="pipe-icon">&#x1F4DD;</div>
+                        <div class="pipe-label">Preprocess</div>
+                    </div>
+                    <div class="pipe-arrow">&rarr;</div>
+                    <div class="pipe-step" data-step="2">
+                        <div class="pipe-icon">&#x1F4CA;</div>
+                        <div class="pipe-label">Represent</div>
+                    </div>
+                    <div class="pipe-arrow">&rarr;</div>
+                    <div class="pipe-step" data-step="3">
+                        <div class="pipe-icon">&#x1F5BC;</div>
+                        <div class="pipe-label">Process</div>
+                    </div>
+                    <div class="pipe-arrow">&rarr;</div>
+                    <div class="pipe-step" data-step="4">
+                        <div class="pipe-icon">&#x2699;</div>
+                        <div class="pipe-label">Integrate</div>
+                    </div>
+                    <div class="pipe-arrow">&rarr;</div>
+                    <div class="pipe-step" data-step="5">
+                        <div class="pipe-icon">&#x1F4C8;</div>
+                        <div class="pipe-label">Evaluate</div>
+                    </div>
+                    <div class="pipe-arrow">&rarr;</div>
+                    <div class="pipe-step" data-step="6">
+                        <div class="pipe-icon">&#x1F50D;</div>
+                        <div class="pipe-label">Explain</div>
+                    </div>
+                </div>
+
+                <!-- Key Stats -->
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" data-count="330000">0</div>
+                        <div class="stat-label">Arabic Reviews</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-count="20000">0</div>
+                        <div class="stat-label">Working Sample</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-value">86.23%</div>
+                        <div class="stat-label">Test F1 Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">10K</div>
+                        <div class="stat-label">TF-IDF Features</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== WEEK TIMELINE ==================== -->
+        <section class="section timeline-section">
+            <div class="container">
+                <h2 class="section-title">Week 8 Timeline</h2>
+                <div class="timeline">
+                    <a href="#day1" class="timeline-item" data-day="1">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-day">Day 01</div>
+                            <h3>Sprint 3 Planning & NLP Preprocessing</h3>
+                            <p>Arabic text cleaning pipeline with negation-protected stop-word handling and lemmatization.</p>
+                            <div class="timeline-tag">NLTK + qalsadi</div>
+                        </div>
+                    </a>
+                    <a href="#day2" class="timeline-item" data-day="2">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-day">Day 02</div>
+                            <h3>TF-IDF & Word Embeddings</h3>
+                            <p>Text representation: TF-IDF vectorization + Word2Vec + AraBERT static embeddings comparison.</p>
+                            <div class="timeline-tag">scikit-learn + gensim</div>
+                        </div>
+                    </a>
+                    <a href="#day3" class="timeline-item" data-day="3">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-day">Day 03</div>
+                            <h3>Computer Vision Preprocessing</h3>
+                            <p>OpenCV preprocessing engine: resize, BGR/RGB conversion, normalization, augmentation pipeline.</p>
+                            <div class="timeline-tag">OpenCV + TensorFlow</div>
+                        </div>
+                    </a>
+                    <a href="#day4" class="timeline-item" data-day="4">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-day">Day 04</div>
+                            <h3>Model Integration & Error Analysis</h3>
+                            <p>End-to-end predict() pipeline, training/serving consistency audit, confusion matrix, error categorization.</p>
+                            <div class="timeline-tag">Full Pipeline</div>
+                        </div>
+                    </a>
+                    <a href="#day5" class="timeline-item" data-day="5">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-day">Day 05</div>
+                            <h3>Full Evaluation, SHAP & Sprint Review</h3>
+                            <p>Complete evaluation vs baseline, SHAP explainability, sprint retrospective, Sprint 4 action plan.</p>
+                            <div class="timeline-tag">SHAP + Review</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DAY 1 ==================== -->
+        <section id="day1" class="section day-section day-1">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">Day 01</span>
+                    <h2 class="day-title">Sprint 3 Planning & NLP Preprocessing</h2>
+                    <p class="day-desc">Building a task-aware Arabic text-cleaning pipeline that preserves sentiment-critical signals.</p>
+                </div>
+
+                <div class="content-grid">
+                    <!-- Goal Card -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F3AF; Sprint 3 Goal</h3>
+                        <p>Turn the Arabic sentiment classifier into a complete, rigorously evaluated and explained pipeline &mdash; from raw text through preprocessing, representation, model integration, error analysis, full evaluation, and SHAP explainability.</p>
+                    </div>
+
+                    <!-- Preprocessing Pipeline -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F504; Preprocessing Pipeline</h3>
+                        <div class="pipeline-visual">
+                            <div class="pv-step">
+                                <span class="pv-num">1</span>
+                                <span class="pv-text">Normalization</span>
+                                <span class="pv-detail">Strip diacritics, unify alef, remove tatweel</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">2</span>
+                                <span class="pv-text">Tokenization</span>
+                                <span class="pv-detail">NLTK word_tokenize on whitespace/punctuation</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">3</span>
+                                <span class="pv-text">Number Removal</span>
+                                <span class="pv-detail">Remove pure digit tokens</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">4</span>
+                                <span class="pv-text">Latin Handling</span>
+                                <span class="pv-detail">Lowercase embedded Latin tokens (brand names, titles)</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">5</span>
+                                <span class="pv-text">Negation Protection</span>
+                                <span class="pv-detail">Protect: &#x0644;&#x0627; &#x0644;&#x0645; &#x0644;&#x0646; &#x0644;&#x064A;&#x0633; &#x0645;&#x0627; &#x063A;&#x064A;&#x0631;</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">6</span>
+                                <span class="pv-text">Lemmatization</span>
+                                <span class="pv-detail">Dictionary-based via qalsadi (train-freq &ge; 5)</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">7</span>
+                                <span class="pv-text">Stop-word Removal</span>
+                                <span class="pv-detail">NLTK Arabic function words (negators preserved)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Decisions -->
+                    <div class="card">
+                        <h3 class="card-title">&#x2696; Key Decisions</h3>
+                        <div class="decision-list">
+                            <div class="decision">
+                                <div class="decision-badge good">&#x2705; Preserved</div>
+                                <p><strong>Negation words</strong> (&#x0644;&#x0627;, &#x0644;&#x0645;, &#x0644;&#x064A;&#x0633;) are never removed by stop-word filtering. They flip sentiment meaning.</p>
+                            </div>
+                            <div class="decision">
+                                <div class="decision-badge good">&#x2705; Kept</div>
+                                <p><strong>Latin tokens</strong> (~3.9%) are lowercased but retained. They are content (brand names, artist names), not noise.</p>
+                            </div>
+                            <div class="decision">
+                                <div class="decision-badge neutral">&#x2696; Separate</div>
+                                <p><strong>Two text pipelines</strong> maintained: classical preprocessing for TF-IDF (this work) vs. raw text for AraBERT transformer (Week 7).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dataset -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F4DA; Dataset</h3>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-val">330,000</span>
+                                <span class="metric-lbl">Total Reviews</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-val">20,000</span>
+                                <span class="metric-lbl">Working Sample</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-val">14K/3K/3K</span>
+                                <span class="metric-lbl">Train/Val/Test</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-val">49.4% / 50.6%</span>
+                                <span class="metric-lbl">Neg / Pos Split</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preprocessing Demo -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F3A8; Before & After Preprocessing</h3>
+                        <div class="preprocess-demo">
+                            <div class="pd-before">
+                                <h4>Raw Text</h4>
+                                <div class="pd-text arabic-text">&#x0647;&#x0630;&#x0627; &#x0627;&#x0644;&#x0645;&#x0646;&#x062A;&#x062C; &#x0645;&#x0645;&#x062A;&#x0627;&#x0632; &#x062C;&#x062F;&#x0627;&#x064B; &#x0648;&#x062C;&#x0648;&#x062F;&#x062A;&#x0647; &#x0645;&#x0645;&#x062A;&#x0627;&#x0632;&#x0629; &#x0623;&#x0646;&#x0635;&#x062D; &#x0627;&#x0644;&#x062C;&#x0645;&#x064A;&#x0639; &#x0628;&#x0634;&#x0631;&#x0627;&#x0626;&#x0647;</div>
+                            </div>
+                            <div class="pd-arrow">&darr;</div>
+                            <div class="pd-after">
+                                <h4>Cleaned Text</h4>
+                                <div class="pd-text arabic-text">&#x0645;&#x0646;&#x062A;&#x062C; &#x0631;&#x0627;&#x0639;&#x0639; &#x062C;&#x062F;&#x0627; &#x0648;&#x062C;&#x0648;&#x062F;&#x062A;&#x0647; &#x0645;&#x0645;&#x062A;&#x0627;&#x0632; &#x0627;&#x0646;&#x0635;&#x0627;&#x062D; &#x0628;&#x0634;&#x064A;&#x0631;</div>
+                            </div>
+                        </div>
+                        <p class="pd-note">Stop words (&#x0647;&#x0630;&#x0627;, &#x0627;&#x0644;&#x0645;&#x0646;&#x062A;&#x062C;, &#x0627;&#x0644;&#x062C;&#x0645;&#x064A;&#x0639;, &#x0628;&#x0634;&#x0631;&#x0627;&#x0626;&#x0647;) removed. Negation &#x0644;&#x0627; preserved. Lemmatization applied.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DAY 2 ==================== -->
+        <section id="day2" class="section day-section day-2">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">Day 02</span>
+                    <h2 class="day-title">TF-IDF & Word Embeddings</h2>
+                    <p class="day-desc">Transforming cleaned Arabic text into numerical representations and comparing approaches.</p>
+                </div>
+
+                <div class="content-grid">
+                    <!-- TF-IDF Config -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F4CA; TF-IDF Configuration</h3>
+                        <div class="config-table">
+                            <div class="config-row">
+                                <span class="config-key">max_features</span>
+                                <span class="config-val">10,000</span>
+                            </div>
+                            <div class="config-row">
+                                <span class="config-key">min_df</span>
+                                <span class="config-val">2</span>
+                            </div>
+                            <div class="config-row">
+                                <span class="config-key">sublinear_tf</span>
+                                <span class="config-val">True</span>
+                            </div>
+                            <div class="config-row">
+                                <span class="config-key">vocab_size</span>
+                                <span class="config-val">10,000</span>
+                            </div>
+                            <div class="config-row">
+                                <span class="config-key">sparsity</span>
+                                <span class="config-val">99.66%</span>
+                            </div>
+                            <div class="config-row">
+                                <span class="config-key">n-grams</span>
+                                <span class="config-val">Unigrams only</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Representation Comparison -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F3C6; Representation Comparison</h3>
+                        <div class="comparison-chart-container">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- CV Sweep -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F50D; Vocabulary Sweep (Validation)</h3>
+                        <div class="sweep-table">
+                            <div class="sweep-header">
+                                <span>max_features</span><span>Val F1</span><span>Status</span>
+                            </div>
+                            <div class="sweep-row">
+                                <span>3,000</span><span>0.8453</span><span class="sweep-status">&#x2014;</span>
+                            </div>
+                            <div class="sweep-row">
+                                <span>5,000</span><span>0.8493</span><span class="sweep-status">&#x2014;</span>
+                            </div>
+                            <div class="sweep-row selected">
+                                <span>10,000</span><span>0.8503</span><span class="sweep-status selected">&#x2705; Selected</span>
+                            </div>
+                            <div class="sweep-row">
+                                <span>20,000</span><span>0.8460</span><span class="sweep-status">&#x2014;</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embeddings -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F310; Word Embeddings</h3>
+                        <div class="embedding-info">
+                            <p><strong>Domain Word2Vec:</strong> Trained on 14K training reviews, 100 dimensions, 8,688 vocabulary words.</p>
+                            <p><strong>Semantic Neighbors:</strong></p>
+                            <div class="neighbor-grid">
+                                <div class="neighbor-group">
+                                    <span class="neighbor-word">&#x0645;&#x0645;&#x062A;&#x0627;&#x0632;</span>
+                                    <span class="neighbor-arrow">&rarr;</span>
+                                    <span class="neighbor-list">&#x0631;&#x0627;&#x0639;&#x0639;, &#x0639;&#x0638;&#x064A;&#x0645;, &#x0645;&#x0630;&#x0647;&#x0644;</span>
+                                </div>
+                                <div class="neighbor-group">
+                                    <span class="neighbor-word">&#x0633;&#x064A;&#x0626;</span>
+                                    <span class="neighbor-arrow">&rarr;</span>
+                                    <span class="neighbor-list">&#x0633;&#x064A;&#x0626;, &#x0631;&#x062F;&#x064A;&#x0621;, &#x0641;&#x0638;&#x064A;&#x0639;</span>
+                                </div>
+                                <div class="neighbor-group">
+                                    <span class="neighbor-word">&#x062C;&#x0648;&#x062F;&#x0629;</span>
+                                    <span class="neighbor-arrow">&rarr;</span>
+                                    <span class="neighbor-list">&#x0631;&#x062F;&#x064A;&#x0621;&#x0629;, &#x0635;&#x0648;&#x0631;&#x0629;, &#x0645;&#x0648;&#x0636;&#x062D;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CV5 F1 -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F4CA; 5-Fold Cross-Validation</h3>
+                        <div class="cv-result">
+                            <div class="cv-big">
+                                <span class="cv-val">0.8556</span>
+                                <span class="cv-pm">&plusmn; 0.0033</span>
+                            </div>
+                            <p class="cv-note">Pipeline is stable &mdash; test set F1 (0.8623) agrees closely with CV mean.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DAY 3 ==================== -->
+        <section id="day3" class="section day-section day-3">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">Day 03</span>
+                    <h2 class="day-title">Computer Vision Preprocessing</h2>
+                    <p class="day-desc">OpenCV preprocessing engine for image classification tasks (dual-track curriculum).</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card card-wide">
+                        <div class="cv-note-box">
+                            <p><strong>Note:</strong> This is an NLP/text classification project. Day 3 implemented the CV preprocessing engine as part of the dual-track curriculum, but it was <em>not applied</em> to the sentiment classification pipeline. The engine is available for future CV tasks.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">&#x1F5BC; OpenCV Pipeline</h3>
+                        <div class="pipeline-visual">
+                            <div class="pv-step">
+                                <span class="pv-num">1</span>
+                                <span class="pv-text">Image Load</span>
+                                <span class="pv-detail">cv2.imread() with IMREAD_COLOR</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">2</span>
+                                <span class="pv-text">BGR &rarr; RGB</span>
+                                <span class="pv-detail">cvtColor() color space conversion</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">3</span>
+                                <span class="pv-text">Resize</span>
+                                <span class="pv-detail">Target: 224&times;224, INTER_AREA downscale</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">4</span>
+                                <span class="pv-text">Normalize</span>
+                                <span class="pv-detail">MobileNet: (x/127.5) - 1.0 or Standard: x/255.0</span>
+                            </div>
+                            <div class="pv-step">
+                                <span class="pv-num">5</span>
+                                <span class="pv-text">Augment</span>
+                                <span class="pv-detail">RandomFlip, RandomRotation, RandomZoom, RandomBrightness</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">&#x26A0; BGR vs RGB Pitfall</h3>
+                        <p>OpenCV reads images in BGR order by default. Deep learning models expect RGB. Swapping channels causes <strong>catastrophic inference accuracy loss</strong> with no runtime error &mdash; the tensor shapes are identical.</p>
+                        <div class="pitfall-demo">
+                            <div class="pitfall-bgr">
+                                <div class="pitfall-ch">&#x1F534; R</div>
+                                <div class="pitfall-ch">&#x1F7E2; G</div>
+                                <div class="pitfall-ch">&#x1F535; B</div>
+                                <span class="pitfall-label">Model expects RGB</span>
+                            </div>
+                            <div class="pitfall-vs">vs</div>
+                            <div class="pitfall-rgb">
+                                <div class="pitfall-ch">&#x1F535; B</div>
+                                <div class="pitfall-ch">&#x1F7E2; G</div>
+                                <div class="pitfall-ch">&#x1F534; R</div>
+                                <span class="pitfall-label">OpenCV default BGR</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">&#x1F6E0; Exported Engine</h3>
+                        <p>Reusable <code>preprocess_image_cv()</code> function with:</p>
+                        <ul class="feature-list">
+                            <li>Strict type checking (path, ndarray, or bytes)</li>
+                            <li>Corrupt file detection</li>
+                            <li>Flexible normalization modes</li>
+                            <li>Grayscale &amp; RGBA handling</li>
+                            <li>Configurable target size</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DAY 4 ==================== -->
+        <section id="day4" class="section day-section day-4">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">Day 04</span>
+                    <h2 class="day-title">Model Integration & Error Analysis</h2>
+                    <p class="day-desc">Wrapping the pipeline into a single predict() function and analyzing failures.</p>
+                </div>
+
+                <div class="content-grid">
+                    <!-- Pipeline -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x2699; Integrated Pipeline</h3>
+                        <div class="pipeline-flow horizontal">
+                            <div class="pipe-step compact">
+                                <div class="pipe-label">Raw Arabic Text</div>
+                            </div>
+                            <div class="pipe-arrow">&rarr;</div>
+                            <div class="pipe-step compact">
+                                <div class="pipe-label">preprocess_text()</div>
+                            </div>
+                            <div class="pipe-arrow">&rarr;</div>
+                            <div class="pipe-step compact">
+                                <div class="pipe-label">TfidfVectorizer</div>
+                            </div>
+                            <div class="pipe-arrow">&rarr;</div>
+                            <div class="pipe-step compact">
+                                <div class="pipe-label">LogisticRegression</div>
+                            </div>
+                            <div class="pipe-arrow">&rarr;</div>
+                            <div class="pipe-step compact highlight">
+                                <div class="pipe-label">Prediction</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confusion Matrix -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F4CA; Confusion Matrix</h3>
+                        <div class="confusion-matrix">
+                            <div class="cm-header">
+                                <span></span>
+                                <span class="cm-col">Predicted Neg</span>
+                                <span class="cm-col">Predicted Pos</span>
+                            </div>
+                            <div class="cm-row">
+                                <span class="cm-row-label">Actual Neg</span>
+                                <span class="cm-cell tn">1,300</span>
+                                <span class="cm-cell fp">200</span>
+                            </div>
+                            <div class="cm-row">
+                                <span class="cm-row-label">Actual Pos</span>
+                                <span class="cm-cell fn">213</span>
+                                <span class="cm-cell tp">1,287</span>
+                            </div>
+                        </div>
+                        <div class="cm-legend">
+                            <span class="cm-legend-item"><span class="cm-dot tn"></span> True Negative: 1,300</span>
+                            <span class="cm-legend-item"><span class="cm-dot fp"></span> False Positive: 200</span>
+                            <span class="cm-legend-item"><span class="cm-dot fn"></span> False Negative: 213</span>
+                            <span class="cm-legend-item"><span class="cm-dot tp"></span> True Positive: 1,287</span>
+                        </div>
+                    </div>
+
+                    <!-- Error Analysis -->
+                    <div class="card">
+                        <h3 class="card-title">&#x26A0; Error Analysis</h3>
+                        <div class="error-summary">
+                            <div class="error-stat">
+                                <span class="error-val">413</span>
+                                <span class="error-lbl">Total Errors</span>
+                            </div>
+                            <div class="error-stat">
+                                <span class="error-val">213</span>
+                                <span class="error-lbl">False Negatives</span>
+                            </div>
+                            <div class="error-stat">
+                                <span class="error-val">200</span>
+                                <span class="error-lbl">False Positives</span>
+                            </div>
+                        </div>
+                        <div class="error-bar">
+                            <div class="error-bar-fn" style="width: 51.6%">
+                                <span>FN 51.6%</span>
+                            </div>
+                            <div class="error-bar-fp" style="width: 48.4%">
+                                <span>FP 48.4%</span>
+                            </div>
+                        </div>
+                        <p class="error-insight"><strong>Dominant pattern:</strong> False Negatives (Positive &rarr; Negative) &mdash; the model sometimes fails to recognize positive sentiment due to bag-of-words limitations.</p>
+                    </div>
+
+                    <!-- Misclassified Examples -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F50D; Misclassified Examples</h3>
+                        <div class="misclass-grid">
+                            <div class="misclass-item">
+                                <div class="misclass-badge fp">FP</div>
+                                <div class="misclass-content">
+                                    <div class="misclass-labels">
+                                        <span>Actual: <strong>Negative</strong></span>
+                                        <span>Predicted: <strong>Positive</strong></span>
+                                        <span>Conf: 98.1%</span>
+                                    </div>
+                                    <p class="misclass-reason"><strong>Category:</strong> Model Weakness &mdash; Clear sentiment not distinguished by TF-IDF</p>
+                                </div>
+                            </div>
+                            <div class="misclass-item">
+                                <div class="misclass-badge fn">FN</div>
+                                <div class="misclass-content">
+                                    <div class="misclass-labels">
+                                        <span>Actual: <strong>Positive</strong></span>
+                                        <span>Predicted: <strong>Negative</strong></span>
+                                        <span>Conf: 93.9%</span>
+                                    </div>
+                                    <p class="misclass-reason"><strong>Category:</strong> Model Weakness &mdash; Negation not captured by bag-of-words</p>
+                                </div>
+                            </div>
+                            <div class="misclass-item">
+                                <div class="misclass-badge fn">FN</div>
+                                <div class="misclass-content">
+                                    <div class="misclass-labels">
+                                        <span>Actual: <strong>Positive</strong></span>
+                                        <span>Predicted: <strong>Negative</strong></span>
+                                        <span>Conf: 92.6%</span>
+                                    </div>
+                                    <p class="misclass-reason"><strong>Category:</strong> Data Issue &mdash; Mixed sentiment, genuinely ambiguous</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DAY 5 ==================== -->
+        <section id="day5" class="section day-section day-5">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">Day 05</span>
+                    <h2 class="day-title">Full Evaluation, Explainability & Sprint Review</h2>
+                    <p class="day-desc">Complete evaluation against baseline, SHAP explainability, sprint retrospective.</p>
+                </div>
+
+                <div class="content-grid">
+                    <!-- Metrics Dashboard -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F4CA; Final Evaluation Dashboard</h3>
+                        <div class="metrics-dashboard">
+                            <div class="metric-card">
+                                <div class="metric-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        <path class="circle-fg" stroke-dasharray="86.23, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    </svg>
+                                    <div class="metric-circle-val">86.23%</div>
+                                </div>
+                                <div class="metric-card-label">Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        <path class="circle-fg precision" stroke-dasharray="86.24, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    </svg>
+                                    <div class="metric-circle-val">86.24%</div>
+                                </div>
+                                <div class="metric-card-label">Precision</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        <path class="circle-fg recall" stroke-dasharray="86.23, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    </svg>
+                                    <div class="metric-circle-val">86.23%</div>
+                                </div>
+                                <div class="metric-card-label">Recall</div>
+                            </div>
+                            <div class="metric-card highlight">
+                                <div class="metric-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        <path class="circle-fg f1" stroke-dasharray="86.23, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    </svg>
+                                    <div class="metric-circle-val">86.23%</div>
+                                </div>
+                                <div class="metric-card-label">F1 (macro)</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        <path class="circle-fg roc" stroke-dasharray="94.17, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    </svg>
+                                    <div class="metric-circle-val">94.17%</div>
+                                </div>
+                                <div class="metric-card-label">ROC-AUC</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Baseline Comparison -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F3C6; Baseline Comparison</h3>
+                        <div class="baseline-comparison">
+                            <div class="baseline-chart-container">
+                                <canvas id="baselineChart"></canvas>
+                            </div>
+                            <div class="baseline-table">
+                                <div class="bt-header">
+                                    <span>Metric</span><span>AraBERT v2</span><span>TF-IDF + LR</span><span>Gap</span>
+                                </div>
+                                <div class="bt-row">
+                                    <span>Accuracy</span><span>0.9000</span><span>0.8623</span><span class="negative">-3.77pp</span>
+                                </div>
+                                <div class="bt-row">
+                                    <span>F1 (macro)</span><span>0.9000</span><span>0.8623</span><span class="negative">-3.77pp</span>
+                                </div>
+                                <div class="bt-row">
+                                    <span>ROC-AUC</span><span>~0.97</span><span>0.9417</span><span class="negative">~-3pp</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="baseline-note">The 3.77% F1 gap reflects the value of contextual embeddings (AraBERT) over bag-of-words (TF-IDF). The classical pipeline trades compute cost for interpretability.</p>
+                    </div>
+
+                    <!-- SHAP Global -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x1F50D; SHAP Global Explainability</h3>
+                        <p class="shap-intro">SHAP (SHapley Additive exPlanations) reveals which features contribute most strongly to predictions. For Logistic Regression + TF-IDF, SHAP values are exact.</p>
+                        <div class="shap-chart-container">
+                            <canvas id="shapChart"></canvas>
+                        </div>
+                        <div class="shap-insights">
+                            <div class="shap-insight">
+                                <span class="shap-insight-icon">&#x2705;</span>
+                                <p><strong>Genuine signals:</strong> Top features are domain-specific sentiment words, not artifacts.</p>
+                            </div>
+                            <div class="shap-insight">
+                                <span class="shap-insight-icon">&#x26A0;</span>
+                                <p><strong>Negation limitation:</strong> Negation tokens are features but their impact is inconsistent &mdash; TF-IDF cannot model scope.</p>
+                            </div>
+                            <div class="shap-insight">
+                                <span class="shap-insight-icon">&#x1F4A1;</span>
+                                <p><strong>Error connection:</strong> Errors cluster around negation and mixed-sentiment examples where independent word features are insufficient.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class Imbalance -->
+                    <div class="card">
+                        <h3 class="card-title">&#x2696; Class Imbalance</h3>
+                        <div class="imbalance-visual">
+                            <div class="imbalance-bar">
+                                <div class="imb-seg neg" style="width: 49.4%">
+                                    <span>Negative 49.4%</span>
+                                </div>
+                                <div class="imb-seg pos" style="width: 50.6%">
+                                    <span>Positive 50.6%</span>
+                                </div>
+                            </div>
+                            <p class="imbalance-note"><strong>Result:</strong> Dataset is balanced (~50/50). No SMOTE, class weighting, or threshold tuning required.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sprint 4 Action -->
+                    <div class="card">
+                        <h3 class="card-title">&#x1F680; Sprint 4 Action</h3>
+                        <div class="action-box">
+                            <p><strong>Package the verified preprocessing + model prediction path into a deployable inference service with input validation, and add an automated prediction validation test that runs before deployment.</strong></p>
+                            <ul class="action-steps">
+                                <li>Create <code>predict_service.py</code> with input validation</li>
+                                <li>Write <code>test_prediction.py</code> with 10 known pairs</li>
+                                <li>Add Dockerfile for deployment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SPRINT REVIEW ==================== -->
+        <section id="sprint-review" class="section sprint-section">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">&#x1F4CB;</span>
+                    <h2 class="day-title">Sprint Review & Retrospective</h2>
+                </div>
+
+                <div class="content-grid">
+                    <!-- Acceptance Criteria -->
+                    <div class="card card-wide">
+                        <h3 class="card-title">&#x2705; Sprint 3 Acceptance Criteria</h3>
+                        <div class="criteria-grid">
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Notebook runs cleanly</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Integrated pipeline exists</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Full evaluation completed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Baseline comparison completed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Error analysis completed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Class imbalance assessed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> SHAP global importance</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> SHAP individual explanation</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> SHAP linked to errors</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Results documented</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Sprint work organized</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Sprint Review completed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Retrospective completed</div>
+                            <div class="criteria-item pass"><span class="criteria-check">&#x2705;</span> Sprint 4 action defined</div>
+                        </div>
+                        <div class="criteria-summary">14/14 criteria PASS</div>
+                    </div>
+
+                    <!-- What Went Well -->
+                    <div class="card">
+                        <h3 class="card-title green">&#x2705; What Went Well</h3>
+                        <ul class="retro-list">
+                            <li>Clean pipeline continuity across Days 1-5</li>
+                            <li>Training/serving consistency achieved</li>
+                            <li>Honest baseline comparison documented</li>
+                            <li>SHAP explainability worked end-to-end</li>
+                            <li>Error analysis drove genuine understanding</li>
+                        </ul>
+                    </div>
+
+                    <!-- What Could Improve -->
+                    <div class="card">
+                        <h3 class="card-title orange">&#x26A0; What Could Improve</h3>
+                        <ul class="retro-list">
+                            <li>Negation scope remains unsolved</li>
+                            <li>No ensemble attempted</li>
+                            <li>Limited hyperparameter tuning</li>
+                            <li>No threshold tuning for deployment</li>
+                        </ul>
+                    </div>
+
+                    <!-- Lessons Learned -->
+                    <div class="card">
+                        <h3 class="card-title blue">&#x1F4A1; What We Learned</h3>
+                        <ul class="retro-list">
+                            <li>TF-IDF remains a competitive classical baseline (86.23% F1)</li>
+                            <li>Contextual embeddings are worth the compute (3.77% gap)</li>
+                            <li>SHAP + error analysis is more powerful than either alone</li>
+                            <li>Preprocessing quality matters for sentiment tasks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INTERACTIVE LAB ==================== -->
+        <section id="lab" class="section lab-section">
+            <div class="container">
+                <div class="day-header">
+                    <span class="day-number">&#x1F9EA;</span>
+                    <h2 class="day-title">Interactive AI/ML Lab</h2>
+                    <p class="day-desc">Try the actual sentiment classification model yourself. Enter Arabic text and see the real prediction.</p>
+                </div>
+
+                <div class="lab-container">
+                    <!-- Input Panel -->
+                    <div class="lab-input-panel">
+                        <h3>Enter Arabic Text</h3>
+                        <textarea id="labInput" class="lab-textarea" placeholder="&#x0627;&#x0643;&#x062A;&#x0628; &#x0646;&#x0635;&#x064A;&#x062D;&#x0627;&#x064B; &#x0628;&#x0647;&#x0630;&#x0627; &#x0627;&#x0644;&#x0643;&#x062A;&#x0627;&#x0628; &#x0645;&#x062D;&#x062A;&#x0648;&#x0627;&#x0647; &#x0636;&#x0639;&#x064A;&#x0641; &#x062C;&#x062F;&#x0627;&#x064B;" rows="4"></textarea>
+                        <div class="lab-examples">
+                            <span class="lab-example-label">Try:</span>
+                            <button class="lab-example-btn" data-text="&#x0647;&#x0630;&#x0627; &#x0627;&#x0644;&#x0645;&#x0646;&#x062A;&#x062C; &#x0631;&#x0627;&#x0639;&#x0639; &#x062C;&#x062F;&#x0627;&#x064B; &#x0648;&#x062C;&#x0648;&#x062F;&#x062A;&#x0647; &#x0645;&#x0645;&#x062A;&#x0627;&#x0632;&#x0629;">&#x1F44D; Positive</button>
+                            <button class="lab-example-btn" data-text="&#x0644;&#x0627; &#x0623;&#x0633;&#x062A;&#x0637;&#x064A;&#x0639; &#x0623;&#x0646; &#x0623;&#x0648;&#x0635;&#x064A; &#x0628;&#x0647;&#x0630;&#x0627; &#x0627;&#x0644;&#x0643;&#x062A;&#x0627;&#x0628; &#x0645;&#x062D;&#x062A;&#x0648;&#x0627;&#x0647; &#x0636;&#x0639;&#x064A;&#x0641;">&#x1F44E; Negative</button>
+                            <button class="lab-example-btn" data-text="&#x0627;&#x0644;&#x0645;&#x0646;&#x062A;&#x062C; &#x0648;&#x0635;&#x0644; &#x0645;&#x0643;&#x0633;&#x0648;&#x0631; &#x0648;&#x062E;&#x062F;&#x0645;&#x0629; &#x0627;&#x0644;&#x0639;&#x0645;&#x0644;&#x0627;&#x0621; &#x0633;&#x064A;&#x0626;&#x0629; &#x0644;&#x0644;&#x063A;&#x0627;&#x064A;&#x0629;">&#x1F61E; Negative</button>
+                            <button class="lab-example-btn" data-text="&#x0623;&#x062D;&#x0644;&#x0649; &#x0645;&#x0634;&#x062A;&#x0631;&#x064A;&#x0627;&#x062A; &#x0639;&#x0645;&#x0644;&#x062A;&#x0647;&#x0627; &#x0641;&#x064A; &#x062D;&#x064A;&#x0627;&#x062A;&#x064A; &#x0634;&#x0643;&#x0631;&#x0627;&#x064B; Amazon">&#x1F389; Positive</button>
+                        </div>
+                        <button id="labPredict" class="lab-btn">
+                            <span class="btn-text">Run Model</span>
+                            <span class="btn-loading" style="display:none">
+                                <span class="spinner"></span> Processing...
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Result Panel -->
+                    <div class="lab-result-panel" id="labResult" style="display:none">
+                        <h3>Prediction Result</h3>
+
+                        <!-- Processing Steps -->
+                        <div class="lab-steps" id="labSteps">
+                            <div class="lab-step" data-step="input">
+                                <span class="lab-step-check">&#x2713;</span> Input received
+                            </div>
+                            <div class="lab-step" data-step="preprocess">
+                                <span class="lab-step-check">&#x2713;</span> Preprocessing completed
+                            </div>
+                            <div class="lab-step" data-step="vectorize">
+                                <span class="lab-step-check">&#x2713;</span> Feature transformation completed
+                            </div>
+                            <div class="lab-step" data-step="predict">
+                                <span class="lab-step-check">&#x2713;</span> Model inference completed
+                            </div>
+                            <div class="lab-step" data-step="explain">
+                                <span class="lab-step-check">&#x2713;</span> Explanation generated
+                            </div>
+                        </div>
+
+                        <!-- Prediction Display -->
+                        <div class="lab-prediction" id="labPrediction">
+                            <div class="lab-pred-class" id="labPredClass">Positive</div>
+                            <div class="lab-pred-conf">
+                                <div class="lab-conf-bar">
+                                    <div class="lab-conf-fill" id="labConfFill" style="width: 83%"></div>
+                                </div>
+                                <span class="lab-conf-val" id="labConfVal">83.09%</span>
+                            </div>
+                        </div>
+
+                        <!-- Cleaned Text -->
+                        <div class="lab-cleaned">
+                            <h4>Preprocessed Text</h4>
+                            <div class="lab-cleaned-text" id="labCleanedText"></div>
+                        </div>
+
+                        <!-- Feature Contributions -->
+                        <div class="lab-features">
+                            <h4>Top Feature Contributions</h4>
+                            <div class="lab-feature-list" id="labFeatures"></div>
+                        </div>
+
+                        <!-- Timing -->
+                        <div class="lab-timing" id="labTiming"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>BinXTech AI & Machine Learning Internship &mdash; Week 8 Showcase</p>
+                <p class="footer-sub">Built from actual notebook results. No fabricated data.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/inference.js"></script>
+</body>
+</html>

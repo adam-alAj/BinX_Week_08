@@ -14,7 +14,7 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 | 2 | Text Representation: TF-IDF & Word Embeddings | [`TF-IDF_Embeddings.ipynb`](./Day2/TF-IDF_Embeddings.ipynb) | ✅ |
 | 3 | Computer-Vision Preprocessing (OpenCV) + Mentor Review | [`OpenCV.ipynb`](./Day3/OpenCV.ipynb) | ✅ |
 | 4 | Model Integration — End-to-End `predict()` Pipeline + Error Analysis | [`Model-Integration_Error-Analysis.ipynb`](./Day4/Model-Integration_Error-Analysis.ipynb) | ✅ |
-| 5 | Full Evaluation, SHAP Explainability, Sprint Review & Retrospective | (Planned) | Later |
+| 5 | Full Evaluation, SHAP Explainability, Sprint Review & Retrospective | [`Sprint-Review.ipynb`](./Day5/Sprint-Review.ipynb) | ✅ |
 
 ---
 
@@ -91,11 +91,19 @@ This week is **Sprint 3** of **Phase 3 — Deep Learning & Applied Project**. Sp
 
 ---
 
-### 📋 Day 5 — Full Evaluation, SHAP Explainability, Sprint Review & Retrospective *(Planned)*
+### ✅ Day 5 — Full Evaluation, SHAP Explainability, Sprint Review & Retrospective
 
-- Full task-appropriate evaluation vs baselines; SHAP global + per-prediction explanations
-- Sprint Review + Sprint Retrospective (one concrete change for Sprint 4 = deployment)
-- Documentation, Git feature-branch workflow, reviewed PRs
+**Focus:** Final sprint close-out: rigorous held-out evaluation, model-vs-baseline comparison, SHAP explainability (global + per‑prediction), and the Sprint Review & Retrospective delivering a clear Sprint 4 action.
+
+**Accomplishments:**
+- Reproduced TF‑IDF (10k) + Logistic Regression pipeline and evaluated on 3,000 held‑out reviews (Test macro F1 = 0.8623; Accuracy = 0.8623; ROC‑AUC ≈ 0.9417).
+- Baseline comparison against Week 7 AraBERT v2 (F1 = 0.9000) with a documented 3.77pp gap and interpretation.
+- SHAP explainability: global importance plots and individual prediction waterfall explanations generated and saved.
+- Full Sprint Review, Retrospective, and a concrete Sprint 4 action: package the preprocessing + prediction path into a validated inference service with automated prediction tests.
+
+Artifacts and notebook:
+- Notebook: [`Day5/Sprint-Review.ipynb`](./Day5/Sprint-Review.ipynb)
+- Figures: `day5_shap_summary.png`, `day5_shap_individual_correct.png`, `day5_shap_individual_error.png`, `day5_confusion_matrix.png`, `day5_roc_curve.png`, `day5_baseline_comparison.png`
 
 ---
 
